@@ -208,14 +208,6 @@ main {
     color 140ms ease;
 }
 
-.download-secondary {
-  border: 2px solid;
-  border-color: #ffffff var(--line) var(--line) #ffffff;
-  color: var(--ink);
-  background: var(--panel);
-  box-shadow: inset -1px -1px 0 #424142;
-}
-
 .download:hover {
   border-color: #ffffff #003399 #003399 #ffffff;
   color: #ffffff;
@@ -228,14 +220,6 @@ main {
   );
   box-shadow: inset 0 0 0 1px #75a9ff;
   text-shadow: 1px 1px #003399;
-}
-
-.download-secondary:hover {
-  border-color: #ffffff var(--line) var(--line) #ffffff;
-  color: var(--ink);
-  background: var(--panel);
-  box-shadow: inset -1px -1px 0 #424142;
-  text-shadow: none;
 }
 
 .download:hover::after,
@@ -301,18 +285,10 @@ main {
   filter: brightness(0) invert(1);
 }
 
-.download-secondary:hover .pixelated-label {
-  filter: none;
-}
-
-.download-secondary:hover::after {
-  border-color: var(--paper);
-}
-
 .site-footer {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   padding: 8px;
   border: 3px solid #0054e3;
   border-top: 1px solid var(--line);
@@ -321,6 +297,15 @@ main {
   background: var(--panel);
   font-size: 10px;
   letter-spacing: 0.04em;
+}
+
+.site-footer .language-link {
+  justify-self: start;
+}
+
+.site-footer > span {
+  justify-self: end;
+  text-align: right;
 }
 
 .copyright-symbol {
@@ -594,6 +579,178 @@ main {
   border-color: #001f75;
   background: #003db8;
   box-shadow: inset 1px 1px #001f75;
+}
+
+.platform-toggle {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.platform-toggle button {
+  min-height: 28px;
+  display: grid;
+  place-items: center;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-size: 12px;
+}
+
+.platform-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.platform-toggle button[aria-pressed="true"] {
+  color: #fff;
+  background: linear-gradient(#3f9bff, #0054e3);
+}
+
+.platform-toggle button:focus-visible {
+  outline: 2px solid #003eaa;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+body[data-platform="macos"] {
+  --panel: #e6edf3;
+  --ink: #24364a;
+  --muted: #526b85;
+  --line: #a5b4c3;
+}
+
+body[data-platform="macos"] main {
+  border-radius: 10px;
+  box-shadow: 0 12px 30px #23394f55, 0 0 0 1px #7b8995;
+}
+
+body[data-platform="macos"] .site-header,
+body[data-platform="macos"] .intent-modal-header {
+  position: relative;
+  border: 1px solid #90979c;
+  border-radius: 10px 10px 0 0;
+  color: #354554;
+  background: repeating-linear-gradient(0deg, #ffffff30 0 1px, #00000008 1px 2px), linear-gradient(#fafafa, #bcbfc2 50%, #e3e5e7);
+  text-shadow: 0 1px #fff;
+}
+
+body[data-platform="macos"] .intent-modal-header {
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px 40px;
+  background: linear-gradient(#fafafa 0%, #e9e9e9 48%, #c8ccd0 51%, #e5e8eb 100%);
+}
+
+body[data-platform="macos"] .intent-modal-title {
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+body[data-platform="macos"] .intent-close-button {
+  position: absolute;
+  left: 14px;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #7d8286;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, #e4e4e4 30%, #a0a3a5 70%, #f5f5f5 100%);
+  box-shadow: inset 0 1px 2px #0003, 0 1px #fff;
+  text-shadow: none;
+}
+
+body[data-platform="macos"] .intent-close-button .pixel-icon {
+  width: 7px;
+  height: 7px;
+  opacity: 0;
+}
+
+body[data-platform="macos"] .intent-close-button:hover {
+  color: #354554;
+  text-shadow: none;
+}
+
+body[data-platform="macos"] .intent-close-button:hover .pixel-icon,
+body[data-platform="macos"] .intent-close-button:focus-visible .pixel-icon {
+  opacity: 1;
+}
+
+body[data-platform="macos"] .intent-close-button:hover::after {
+  content: none;
+}
+
+body[data-platform="macos"] .header-info-button {
+  border-color: #8795a2;
+  color: #34485c;
+  background: linear-gradient(#fff, #dae1e7);
+  box-shadow: inset 0 0 0 2px #fff9, 0 1px 2px #0003;
+  text-shadow: none;
+}
+
+body[data-platform="macos"] .hero,
+body[data-platform="macos"] .intent-modal-body {
+  border: 1px solid #b4c1cd;
+  background: repeating-linear-gradient(0deg, #ffffff80 0 2px, #e9eef3 2px 4px);
+}
+
+body[data-platform="macos"] .site-footer,
+body[data-platform="macos"] .intent-modal-footer {
+  border: 1px solid #b4c1cd;
+  border-radius: 0 0 10px 10px;
+  background: linear-gradient(#e6edf3, #d5dfe9);
+}
+
+body[data-platform="macos"] .download,
+body[data-platform="macos"] .language-link,
+body[data-platform="macos"] .modal-ok-button,
+body[data-platform="macos"] .platform-toggle button {
+  border: 1px solid #8d9cac;
+  border-radius: 9px;
+  background: linear-gradient(#fff 0%, #f4f7fa 48%, #dce3ea 51%, #fff 100%);
+  box-shadow: inset 0 1px #fff, 0 1px 2px #0003;
+  text-shadow: none;
+}
+
+body[data-platform="macos"] .platform-toggle button:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+body[data-platform="macos"] .platform-toggle button:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+body[data-platform="macos"] .download:hover,
+body[data-platform="macos"] .language-link:hover,
+body[data-platform="macos"] .modal-ok-button:hover,
+body[data-platform="macos"] .platform-toggle button[aria-pressed="true"] {
+  border-color: #6297bb;
+  color: #173e60;
+  background: linear-gradient(#f2fbff, #bce7ff 48%, #79c5ef 51%, #c4ebff);
+  box-shadow: inset 0 1px #fff, 0 1px 3px #3473a144;
+  text-shadow: none;
+}
+
+body[data-platform="macos"] .has-pixelated-label:hover {
+  color: transparent;
+}
+
+body[data-platform="macos"] .download:hover .pixelated-label,
+body[data-platform="macos"] .modal-ok-button:hover .pixelated-label {
+  filter: none;
+}
+
+body[data-platform="macos"] .download:hover::after,
+body[data-platform="macos"] .language-link:hover::after,
+body[data-platform="macos"] .modal-ok-button:hover::after {
+  content: none;
+}
+
+body[data-platform="macos"] .intent-modal {
+  border: 1px solid #90979c;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px #23394f55;
 }
 
 @media (max-width: 640px) {

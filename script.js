@@ -1,6 +1,8 @@
 const DOWNLOAD_URLS = {
   setup: "https://github.com/Trapo6x7/nofaceexe/releases/download/v1.2.2/noface.exe-Setup-1.2.2-x64.exe",
   portable: "https://github.com/Trapo6x7/nofaceexe/releases/download/v1.2.2/noface.exe-Portable-1.2.2-x64.exe",
+  arm64: "assets/NOFACE.EXE-1.3.0-beta.1-macOS-arm64.dmg",
+  x64: "assets/NOFACE.EXE-1.3.0-beta.1-macOS-x64.dmg",
 };
 
 const TRANSLATIONS = {
@@ -9,10 +11,13 @@ const TRANSLATIONS = {
     aboutLabel: "À propos",
     closeLabel: "Fermer",
     switchLabel: "Passer le site en anglais",
-    install: "Installer noface.exe",
-    portable: "Version portable",
+    install: "Télécharger · installation",
+    portable: "Télécharger · portable",
+    arm64: "Télécharger · Apple Silicon · bêta",
+    x64: "Télécharger · Intel · bêta",
+    platformLabel: "Système d’exploitation",
     desktopDownloadNotice:
-      "noface.exe est disponible sur Windows. \n Ouvrez cette page depuis un ordinateur pour le télécharger.",
+      "noface.exe est disponible sur Windows et macOS. \n Ouvrez cette page depuis un ordinateur pour le télécharger.",
     tagline: "LOCAL - ANONYME - GRATUIT",
     gestureTitle: "Le geste",
     gestureBody:
@@ -50,10 +55,13 @@ const TRANSLATIONS = {
     aboutLabel: "About",
     closeLabel: "Close",
     switchLabel: "Switch the site to French",
-    install: "Install noface.exe",
-    portable: "Portable version",
+    install: "Download · installer",
+    portable: "Download · portable",
+    arm64: "Download · Apple Silicon · beta",
+    x64: "Download · Intel · beta",
+    platformLabel: "Operating system",
     desktopDownloadNotice:
-      "noface.exe is available for Windows. \n Open this page on a computer to download it.",
+      "noface.exe is available for Windows and macOS. \n Open this page on a computer to download it.",
     tagline: "LOCAL - ANONYMOUS - FREE",
     gestureTitle: "The gesture",
     gestureBody:
@@ -201,7 +209,28 @@ function renderPixelatedLabels() {
 }
 
 let currentLanguage = "en";
-renderPixelatedLabels();
+function applyPlatform(platform) {
+  document.body.dataset.platform = platform;
+  const icon = platform === "macos" ? "assets/iconmac.png" : "assets/icon.png";
+  document.querySelector(".brand img").src = icon;
+  document.querySelector('link[rel="icon"]').href = icon;
+  document.querySelectorAll("[data-platform]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.platform === platform));
+  });
+  document.querySelectorAll("[data-download]").forEach((link, index) => {
+    const key = platform === "macos" ? ["arm64", "x64"][index] : ["setup", "portable"][index];
+    link.dataset.download = key;
+    link.dataset.i18n = key === "setup" ? "install" : key;
+    link.href = DOWNLOAD_URLS[key];
+  });
+  applyLanguage(currentLanguage);
+  renderPixelatedLabels();
+}
+
+document.querySelectorAll("button[data-platform]").forEach((button) => {
+  button.addEventListener("click", () => applyPlatform(button.dataset.platform));
+});
+applyPlatform(/Mac/i.test(navigator.platform) && !isMobileOrTabletDevice() ? "macos" : "windows");
 
 document.querySelector("[data-language-toggle]")?.addEventListener("click", () => {
   currentLanguage = applyLanguage(currentLanguage === "fr" ? "en" : "fr");
@@ -234,6 +263,7 @@ function renderModalPixelation() {
   source.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
 
   const sourceMarkup = new XMLSerializer().serializeToString(source);
+  const modalStyles = getComputedStyle(modalBody);
   const sourceStyles = `
     * { box-sizing: border-box; }
     .intent-modal-body {
@@ -241,7 +271,7 @@ function renderModalPixelation() {
       height: ${bounds.height}px;
       overflow: hidden;
       padding: 20px 24px 12px;
-      background: #f4f1e8ff;
+      background: ${modalStyles.background};
       color: #000000;
       font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
     }

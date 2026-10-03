@@ -18,8 +18,21 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-  </head>
+  </head>           <!---
+      ___           ___           ___           ___           ___     
+     /\  \         /\  \         /\  \         /\  \         /\  \    
+     \:\  \       /::\  \       /::\  \       /::\  \       /::\  \   
+      \:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \     /:/\:\  \  
+      /::\  \   /::\~\:\  \   /::\~\:\  \   /::\~\:\  \   /:/  \:\  \ 
+     /:/\:\__\ /:/\:\ \:\__\ /:/\:\ \:\__\ /:/\:\ \:\__\ /:/__/ \:\__\
+    /:/  \/__/ \/_|::\/:/  / \/__\:\/:/  / \/__\:\/:/  / \:\  \ /:/  /
+   /:/  /         |:|::/  /       \::/  /       \::/  /   \:\  /:/  / 
+   \/__/          |:|\/__/        /:/  /         \/__/     \:\/:/  /  
+                  |:|  |         /:/  /                     \::/  /   
+                   \|__|         \/__/                       \/__/    
+-->
   <body>
+
     <main data-window>
       <header class="site-header" data-drag-handle>
         <span class="brand" aria-hidden="true">
@@ -47,19 +60,19 @@
         <div class="hero-copy">
           <div class="downloads">
             <a class="download" data-download="setup" data-i18n="install" download>
-              Install noface.exe
+              Download · installer
             </a>
             <a
-              class="download download-secondary"
+              class="download"
               data-download="portable"
               data-i18n="portable"
               download
             >
-              Portable version
+              Download · portable
             </a>
           </div>
           <p class="desktop-download-notice" data-i18n="desktopDownloadNotice">
-            noface.exe is available for Windows. <br /> Open this page on a computer to download it.
+            noface.exe is available for Windows and macOS. <br /> Open this page on a computer to download it.
           </p>
           <h1 class="hero-title" data-i18n="tagline">LOCAL - ANONYMOUS - FREE</h1>
         </div>
@@ -67,6 +80,18 @@
 
       <footer class="site-footer">
         <button class="language-link" type="button" data-language-toggle>FR</button>
+        <div class="platform-toggle" role="group" aria-label="Operating system" data-i18n-aria-label="platformLabel">
+          <button type="button" data-platform="windows" aria-pressed="true" aria-label="Windows" title="Windows">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M2 4.5 11 3.3v8H2zm11-1.4L22 2v9.3h-9zM2 13h9v8L2 19.7zm11 0h9v9l-9-1.2z" />
+            </svg>
+          </button>
+          <button type="button" data-platform="macos" aria-pressed="false" aria-label="macOS" title="macOS">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M16.8 1.5c.2 1.7-.5 3.1-1.5 4.1-1 1-2.4 1.6-3.8 1.4-.2-1.5.5-3 1.5-4 1-1 2.5-1.6 3.8-1.5ZM20.6 17.5c-.5 1.2-.8 1.8-1.5 2.8-.9 1.3-2.1 2.9-3.6 2.9-1.3 0-1.7-.8-3.5-.8s-2.2.8-3.5.8c-1.5 0-2.6-1.4-3.5-2.7-2.5-3.6-2.8-8.5-1.3-10.9 1.1-1.7 2.8-2.7 4.5-2.7 1.4 0 2.3.8 3.5.8 1.2 0 1.9-.8 3.5-.8 1.4 0 2.8.8 3.8 2-3.3 1.8-2.8 6.5 1.6 8.6Z" />
+            </svg>
+          </button>
+        </div>
         <span><span class="copyright-symbol">©</span> <span data-year>2026</span> — TRAPO.JS</span>
       </footer>
     </main>
@@ -190,7 +215,7 @@
 
         <div class="intent-modal-body">
           <p data-i18n="desktopDownloadNotice">
-            noface.exe is available for Windows. <br /> Open this page on a computer to download it.
+            noface.exe is available for Windows and macOS. <br /> Open this page on a computer to download it.
           </p>
         </div>
 
