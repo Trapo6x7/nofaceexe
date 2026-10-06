@@ -46,7 +46,7 @@ const TRANSLATIONS = {
     politicsBody:
       "Tout le traitement s’effectue localement, sans envoi vers un serveur ni stockage distant : les images " +
       "restent sur l’appareil de l’utilisateur. Ce choix technique devient une position politique, puisque " +
-      "l’anonymat repose sur l’absence même de collecte. L’esthétique Windows datée prolonge cette idée en " +
+      "l’anonymat repose sur l’absence même de collecte. L'interface de l'outil prolonge cette idée en " +
       "évoquant une époque où le logiciel restait un objet local, autonome, que l’on installait et possédait, " +
       "loin des plateformes, du cloud et de la surveillance permanente.",
   },
